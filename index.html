@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maître Myriam ABDALLAOUI - Avocat à Nice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .contact-header {
+            text-align: right;
+        }
+
+        .contact-header div {
+            margin: 0.3rem 0;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #34495e;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 2px;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        /* Presentation specifique */
+        .presentation {
+            text-align: center;
+        }
+
+        .qualification {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .qualification h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .qualification ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .qualification li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .qualification li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* Expertise Grid */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .expertise-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .expertise-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .expertise-card p {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                text-align: center;
+            }
+
+            .contact-header {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-btn {
+                width: 90%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">Maître Myriam ABDALLAOUI</div>
+                    <div class="tagline">Avocat au Barreau de Nice</div>
+                </div>
+                <div class="contact-header">
+                    <div>📞 06.04.65.39.13</div>
+                    <div>✉️ myriam-abdallaoui@hotmail.com</div>
+                    <div>📍 11b Boulevard Dubouchage, 06000 Nice</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="showSection('presentation')">Présentation</button>
+                <button class="nav-btn" onclick="showSection('contrats')">Contrats</button>
+                <button class="nav-btn" onclick="showSection('locatif')">Contentieux Locatif</button>
+                <button class="nav-btn" onclick="showSection('divorce')">Divorce</button>
+                <button class="nav-btn" onclick="showSection('pension')">Pension Alimentaire</button>
+                <button class="nav-btn" onclick="showSection('titres')">Titres de Séjour</button>
+                <button class="nav-btn" onclick="showSection('nationalite')">Nationalité Française</button>
+                <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Section Présentation -->
+            <section id="presentation" class="section active">
+                <h2>Présentation</h2>
+                <div class="presentation">
+                    <p>Bienvenue sur le site de Maître Myriam ABDALLAOUI, avocate au Barreau de Nice, spécialisée dans diverses branches du droit civil et commercial.</p>
+                    
+                    <div class="qualification">
+                        <h3>Formation et Qualifications</h3>
+                        <ul>
+                            <li>Titulaire d'un Master I en Droit Privé</li>
+                            <li>Master II en droit des responsabilités</li>
+                            <li>Diplômée de l'École de formation professionnelle des Avocats du Sud-Est de Marseille</li>
+                        </ul>
+                    </div>
+
+                    <p>J'interviens auprès des juridictions de Nice, Grasse et toutes celles qui relèvent du ressort de la Cour d'appel d'Aix-en-Provence.</p>
+                    <p>Je suis également disponible pour des missions de postulation et de représentation pour les confrères extérieurs au Barreau de NICE.</p>
+                </div>
+
+                <div class="expertise-grid">
+                    <div class="expertise-card" onclick="showSection('contrats')">
+                        <h3>Contrats</h3>
+                        <p>Litiges contractuels, validité, exécution et rupture des contrats</p>
+                    </div>
+                    <div class="expertise-card" onclick="showSection('locatif')">
+                        <h3>Contentieux Locatif</h3>
+                        <p>Accompagnement dans toutes les situations liées au logement</p>
+                    </div>
+                    <div class="expertise-card" onclick="showSection('divorce')">
+                        <h3>Divorce</h3>
+                        <p>Procédures de divorce conflictuelles ou amiables</p>
+                    </div>
+                    <div class="expertise-card" onclick="showSection('pension')">
+                        <h3>Pension Alimentaire</h3>
+                        <p>Révision et fixation de pensions alimentaires</p>
+                    </div>
+                    <div class="expertise-card" onclick="showSection('titres')">
+                        <h3>Titres de Séjour</h3>
+                        <p>Accompagnement dans les démarches administratives</p>
+                    </div>
+                    <div class="expertise-card" onclick="showSection('nationalite')">
+                        <h3>Nationalité Française</h3>
+                        <p>Procédures de naturalisation et acquisition</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Contrats -->
+            <section id="contrats" class="section">
+                <h2>Contrats</h2>
+                <p>Les litiges contractuels peuvent surgir dans divers domaines tels que la vente, les services, la location, ou encore les crédits à la consommation. Maître Myriam ABDALLAOUI intervient pour traiter les problématiques relatives à la validité, à l'exécution ou à la rupture des contrats civils et commerciaux.</p>
+                <p>Elle veille à la protection de vos intérêts, que ce soit pour demander la résiliation, la résolution ou l'annulation d'un contrat.</p>
+            </section>
+
+            <!-- Section Contentieux Locatif -->
+            <section id="locatif" class="section">
+                <h2>Contentieux Locatif</h2>
+                <p>Maître Myriam ABDALLAOUI vous accompagne dans toutes les situations juridiques liées au logement.</p>
+                <p>En tant que bailleur, faire face à des impayés de loyers peut vite devenir un véritable casse-tête. La procédure de résiliation de bail est complexe, strictement encadrée par la loi et nécessite une parfaite maîtrise des étapes juridiques.</p>
+                <p>Grâce à son expertise, Maître ABDALLAOUI vous guide efficacement dans cette démarche, en assurant la défense rigoureuse de vos intérêts à chaque étape.</p>
+            </section>
+
+            <!-- Section Divorce -->
+            <section id="divorce" class="section">
+                <h2>Divorce</h2>
+                <p>Que votre séparation soit conflictuelle ou amiable, Maître Myriam ABDALLAOUI vous accompagne avec rigueur et bienveillance tout au long de la procédure de divorce. Elle vous aide à faire le point sur votre situation, à défendre vos droits et à préserver au mieux vos intérêts, notamment en ce qui concerne la garde des enfants, la pension alimentaire ou le partage des biens.</p>
+                <p>Dans les cas où les époux s'entendent sur les modalités de la rupture, le divorce par consentement mutuel permet aux époux de régler eux-mêmes les conséquences de leur rupture. Cette procédure, beaucoup plus rapide, évite le passage devant le juge.</p>
+                <p>Maître Myriam ABDALLAOUI vous accompagne à chaque étape, en veillant à ce que la convention de divorce reflète un équilibre respectueux de vos intérêts.</p>
+            </section>
+
+            <!-- Section Pension Alimentaire -->
+            <section id="pension" class="section">
+                <h2>Pension Alimentaire</h2>
+                <p>Vous avez perdu votre emploi, subi une baisse de revenus, ou au contraire, vos charges ont augmenté ? Les besoins de votre enfant ont évolué (études, santé, etc.) ? Tous ces éléments peuvent justifier une demande de révision de la pension alimentaire, à la hausse comme à la baisse.</p>
+                <p>Maître Myriam ABDALLAOUI vous accompagne dans cette démarche et évalue avec vous la recevabilité de la demande, pour engager, si besoin, une procédure devant le juge aux affaires familiales.</p>
+            </section>
+
+            <!-- Section Titres de Séjour -->
+            <section id="titres" class="section">
+                <h2>Titres de Séjour</h2>
+                <p>Obtenir un titre de séjour peut s'avérer complexe, tant les démarches administratives sont exigeantes et parfois sources de retards. Que vous soyez étudiant, salarié, demandeur d'asile, conjoint de Français ou parent d'enfant français, chaque situation exige une analyse rigoureuse et un dossier complet, conforme aux exigences de la Préfecture.</p>
+                <p>Maître Myriam ABDALLAOUI vous accompagne à chaque étape de votre demande de titre de séjour.</p>
+                <p>En cas de refus ou de rejet de votre demande, Maître Myriam ABDALLAOUI vous assiste également dans le cadre d'un recours contentieux devant le Tribunal administratif.</p>
+            </section>
+
+            <!-- Section Nationalité Française -->
+            <section id="nationalite" class="section">
+                <h2>Nationalité Française</h2>
+                <p>Vous souhaitez devenir Français(e) par naturalisation ? Vous envisagez de déposer une demande, mais vous êtes confronté(e) à des démarches complexes ou à des difficultés administratives ? Maître ABDALLAOUI vous accompagne pas à pas dans ce parcours exigeant.</p>
+                <p>Obtenir la nationalité française implique de respecter des conditions précises et de fournir un dossier complet, adapté à votre situation personnelle. Selon votre profil — mariage avec un(e) Français(e), lien de filiation avec un Français (parent, grand-parent, frère ou sœur), naissance en France de parents étrangers, adoption, recueil ou naturalisation par décret — les pièces justificatives et les conditions varient.</p>
+                <p>Maître ABDALLAOUI vous aide à identifier la procédure la plus appropriée, à rassembler les documents nécessaires, et à construire un dossier solide, en veillant à chaque détail. Son accompagnement rigoureux et personnalisé permet d'optimiser vos chances de succès et de sécuriser votre démarche.</p>
+            </section>
+
+            <!-- Section Contact -->
+            <section id="contact" class="section">
+                <h2>Contact</h2>
+                <p>N'hésitez pas à me contacter pour toute consultation ou demande d'information. Je me tiens à votre disposition pour vous accompagner dans vos démarches juridiques.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:0604653913">06.04.65.39.13</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Email</h3>
+                        <p><a href="mailto:myriam-abdallaoui@hotmail.com">myriam-abdallaoui@hotmail.com</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Adresse</h3>
+                        <p>11b Boulevard Dubouchage<br>06000 Nice</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Maître Myriam ABDALLAOUI - Avocat au Barreau de Nice. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Retirer la classe active de tous les boutons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Afficher la section demandée
+            document.getElementById(sectionId).classList.add('active');
+
+            // Activer le bouton correspondant
+            event.target.classList.add('active');
+
+            // Scroll vers le haut de la section
+            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Animation au scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            } else {
+                nav.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
