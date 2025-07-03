@@ -184,7 +184,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewthe viewBox="0 0 100 100"><g fill-opacity="0.03"><polygon fill="%23ffffff" points="50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40"/></g></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill-opacity="0.03"><polygon fill="%23ffffff" points="50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40"/></g></svg>');
             background-size: 100px 100px;
         }
 
@@ -349,20 +349,21 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
-            padding: 10px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .modal-content {
             background: var(--white);
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            border-radius: 12px;
+            margin: 0;
+            padding: 20px;
+            border-radius: 0;
             position: relative;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             animation: modalFadeIn 0.3s ease;
             border-left: 4px solid var(--accent-color);
+            max-height: 100vh;
+            overflow-y: auto;
         }
 
         @keyframes modalFadeIn {
@@ -377,23 +378,33 @@
             }
         }
 
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 10px 0;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
         .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             color: var(--text-color);
             transition: var(--transition);
             background: var(--light-gray);
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 36px;
+            line-height: 40px;
             text-align: center;
+            touch-action: manipulation;
         }
 
         .close-modal:hover {
@@ -426,6 +437,19 @@
             line-height: 1.7;
             color: var(--text-color);
             margin-bottom: 15px;
+        }
+
+        .swipe-indicator {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 5px;
+            background: var(--light-gray);
+            border-radius: 2.5px;
+            cursor: grab;
         }
 
         /* Contact */
@@ -464,13 +488,6 @@
 
         .contact-form {
             max-width: 500px;
-        }
-
-        .contact-form label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-            font-weight: 500;
         }
 
         .contact-area,
@@ -668,16 +685,27 @@
             }
 
             .modal {
-                padding: 10px;
+                padding: 0;
             }
 
             .modal-content {
-                max-width: 90%;
-                margin: 15px auto;
+                width: 100%;
+                height: 100%;
+                margin: 0;
                 padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-                border-left: 3px solid var(--accent-color);
+                border-radius: 0;
+                border-left: none;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .modal-header {
+                padding: 15px 20px;
+                margin-bottom: 20px;
+            }
+
+            .swipe-indicator {
+                display: block;
             }
 
             .modal h3 {
@@ -698,16 +726,14 @@
 
             .close-modal {
                 font-size: 24px;
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
             }
         }
 
         @media (max-width: 480px) {
             .modal-content {
-                max-width: 95%;
-                margin: 10px auto;
                 padding: 15px;
             }
 
@@ -721,9 +747,9 @@
 
             .close-modal {
                 font-size: 20px;
-                width: 28px;
-                height: 28px;
-                line-height: 28px;
+                width: 36px;
+                height: 36px;
+                line-height: 36px;
             }
         }
     </style>
@@ -839,8 +865,11 @@
         <!-- Modal -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <span class="close-modal" onclick="closeModal()">×</span>
-                <h3 id="modal-title"></h3>
+                <div class="modal-header">
+                    <h3 id="modal-title"></h3>
+                    <span class="close-modal" onclick="closeModal()">×</span>
+                </div>
+                <div class="swipe-indicator"></div>
                 <div id="modal-body"></div>
             </div>
         </div>
@@ -854,23 +883,6 @@
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2884.0710554859976!2d7.2619!3d43.7009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cddaa5f5a5a5a5%3A0x5a5a5a5a5a5a5a5a!2s11b%20Boulevard%20Dubouchage%2C%2006000%20Nice%2C%20France!5e0!3m2!1sfr!2sfr!4v1234567890"
                             allowfullscreen="" loading="lazy"></iframe>
-                        <!-- <form method="post" action="mailto:myriam-abdallaoui@hotmail.com">
-                            <label>E-mail</label>
-                            <input class="contact-area" type="email" name="email" placeholder="Votre e-mail" required>
-
-                            <label>Nom</label>
-                            <input class="contact-area" type="text" name="nom" placeholder="Votre nom" required>
-
-                            <label>Téléphone</label>
-                            <input class="contact-area" type="tel" name="telephone" placeholder="Votre numéro"
-                                pattern="[0-9]{10}" required>
-
-                            <label>Message</label>
-                            <textarea class="contact-area-text" name="message" placeholder="Votre demande"
-                                required></textarea>
-
-                            <input class="submit-button" type="submit" value="Envoyer">
-                        </form> -->
                     </div>
                 </div>
                 <div class="contact-rightpart">
@@ -957,6 +969,9 @@
             modalBody.innerHTML = `<p>${modalContent[domain].content}</p>`;
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+
+            // Initialize swipe to close
+            initSwipeToClose();
         }
 
         function closeModal() {
@@ -965,10 +980,50 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Fermer le modal en cliquant en dehors
+        // Swipe to close functionality
+        function initSwipeToClose() {
+            const modalContent = document.querySelector('.modal-content');
+            const swipeIndicator = document.querySelector('.swipe-indicator');
+            let startY = 0;
+            let isDragging = false;
+
+            swipeIndicator.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].clientY;
+                isDragging = true;
+                modalContent.style.transition = 'none';
+            });
+
+            swipeIndicator.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const currentY = e.touches[0].clientY;
+                const diffY = currentY - startY;
+                if (diffY > 0) {
+                    modalContent.style.transform = `translateY(${diffY}px)`;
+                }
+            });
+
+            swipeIndicator.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                modalContent.style.transition = 'transform 0.3s ease';
+                const diffY = e.changedTouches[0].clientY - startY;
+
+                if (diffY > 100) { // Threshold for swipe down
+                    closeModal();
+                    modalContent.style.transform = 'translateY(100%)';
+                    setTimeout(() => {
+                        modalContent.style.transform = 'translateY(0)';
+                    }, 300);
+                } else {
+                    modalContent.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Close modal on backdrop click
         window.onclick = function (event) {
             const modal = document.getElementById('modal');
-            if (event.target == modal) {
+            if (event.target === modal) {
                 closeModal();
             }
         }
