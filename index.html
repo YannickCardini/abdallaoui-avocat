@@ -278,7 +278,7 @@
         .article-marteau {
             width: 100%;
             height: 500px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%232c3e50" d="M512 256c0 35.35-28.65 64-64 64H346.5c13.25 40.75 50.13 111.8 36.63 151.4C375 498.9 350.1 512 324.8 512c-7.945 0-16.14-1.246-24.33-3.863c-21.88-6.992-22.62 5.625-38.38 11.88-55.38c4.875-13.25 9.875-26.88 9.875-44.88c0-39.75-32.25-72-72-72h-142c-35.35 0-64-28.65-64-64s28.65-64 64-64H448C483.3 151.2 512 179.9 512 215.2V256zM160 432c0 8.836-7.164 16-16 16H128c-8.836 0-16-7.164-16-16V288c0-8.836 7.164-16 16-16h16C152.8 272 160 279.2 160 288V432zM224 416c0 8.836-7.164 16-16 16H192c-8.838 0-16-7.164-16-16v-96c0-8.838 7.162-16 16-16h16c8.836 0 16 7.162 16 16V416zM288 400c0 8.836-7.164 16-16 16h-16c-8.838 0-16-7.164-16-16v-64c0-8.838 7.162-16 16-16H272c8.836 0 16 7.162 16 16V400zM448 96h-172.8c-6.875-19.38-25.38-32-44.75-32H115.5C96.13 25.38 59.25-4.5 18.5 1.125C13.12 1.875 8.251 4.75 4.626 9C1.001 13.38-.6245 18.88 .2505 24.38C2.876 43.75 32.75 80.63 71.38 86C74 86.38 76.63 86.5 79.13 86.5c16.25 0 31.38-6.125 42.88-17.5C127.6 64 133.4 64 139.3 64h91.25c19.38 0 37.88 12.62 44.75 32H64C28.65 96 0 124.7 0 160v192c0 35.35 28.65 64 64 64h182.8c-1.762 5.43-3.652 10.41-5.49 15.22C234.4 449.5 228 466.6 228 488.1c0 1.25 .3809 1.855 .4434 1.98C228.5 490.1 228.8 490 229.1 490h.0566c5.137 0 20.27-.0156 29.47-15.22c14.38-23.75 2.25-83.53-15.35-133.8h204C483.3 341 512 312.3 512 277V160C512 124.7 483.3 96 448 96z"/></svg>') center no-repeat;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%232c3e50" d="M480 160H352l-48-48H208l-48 48H32c-17.67 0-32 14.33-32 32v288c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32V192c0-17.67-14.33-32-32-32zm-16 288H48c-8.84 0-16-7.16-16-16V208c0-8.84 7.16-16 16-16h112l48-48h96l48 48h112c8.84 0 16 7.16 16 16v224c0 8.84-7.16 16-16 16zm-64-352h-96V32h-64v64H112L56 40.96V96H16c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-40V40.96L400 96zM256 384c-70.69 0-128-57.31-128-128s57.31-128 128-128 128 57.31 128 128-57.31 128-128 128zm0-224c-52.94 0-96 43.06-96 96s43.06 96 96 96 96-43.06 96-96-43.06-96-96-96z"/></svg>') center no-repeat;
             background-size: contain;
             opacity: 0.1;
         }
@@ -568,66 +568,6 @@
             text-decoration: underline;
         }
 
-        /* Localisation */
-        .location-section {
-            padding: 100px 0;
-            background: var(--light-gray);
-        }
-
-        .location-h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .location-h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--accent-color);
-        }
-
-        .location-part {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .contact-tel,
-        .contact-fax {
-            display: block;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-
-        .contact-tel:hover,
-        .contact-fax:hover {
-            color: var(--accent-color);
-        }
-
-        .location-aside {
-            width: 100%;
-            height: 400px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%232c3e50" d="M256 0C149.3 0 64 85.33 64 192c0 36.86 11.91 70.47 32 98.09L256 512l160-221.9c20.09-27.62 32-61.23 32-98.09C448 85.33 362.7 0 256 0zm0 320c-70.69 0-128-57.31-128-128S185.3 64 256 64s128 57.31 128 128-57.3 128-128 128z"/></svg>') center no-repeat;
-            background-size: contain;
-            opacity: 0.1;
-        }
-
         iframe {
             width: 100%;
             height: 400px;
@@ -663,15 +603,13 @@
             }
 
             .article-container,
-            .contact-container,
-            .location-part {
+            .contact-container {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
             .article-h1,
-            .contact-h1,
-            .location-h1 {
+            .contact-h1 {
                 font-size: 2.2rem;
             }
 
@@ -769,7 +707,6 @@
             <div class="link"><a href="#presentation">Présentation</a></div>
             <div class="link"><a href="#domainesexpertise">Domaines d'expertise</a></div>
             <div class="link"><a href="#contact">Contact</a></div>
-            <div class="link"><a href="#localisation">Localisation</a></div>
 
             <div class="bottom">
                 <p>2025 © Tous droits réservés<br>
@@ -818,7 +755,7 @@
                         Le Cabinet travaille essentiellement par <a href="#contact">mail</a>, donc n'hésitez pas à nous
                         adresser un <a href="#contact">mail</a> avec votre demande. Il y sera répondu très rapidement.
                         Pour une prise de rendez-vous, vous pouvez directement contacter par <a
-                            href="#localisation">téléphone</a> le Cabinet.
+                            href="#contact">téléphone</a> le Cabinet.
                     </p>
                 </div>
                 <div class="article-rightpart">
