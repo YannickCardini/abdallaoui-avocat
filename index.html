@@ -347,7 +347,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
             padding: 20px;
             overflow-y: auto;
@@ -358,15 +358,17 @@
             max-width: 800px;
             margin: 50px auto;
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 15px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             animation: modalFadeIn 0.3s ease;
+            border-left: 5px solid var(--accent-color);
         }
 
         @keyframes modalFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-50px);
             }
 
             to {
@@ -377,30 +379,51 @@
 
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 30px;
+            top: 15px;
+            right: 15px;
+            font-size: 32px;
             cursor: pointer;
             color: var(--text-color);
             transition: var(--transition);
+            background: var(--light-gray);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-modal:hover {
-            color: var(--accent-color);
+            color: var(--white);
+            background: var(--accent-color);
+            transform: rotate(90deg);
         }
 
         .modal h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .modal h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
         }
 
         .modal p {
             font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         /* Contact */
@@ -641,6 +664,11 @@
                 width: 100%;
                 left: -100%;
             }
+
+            .modal-content {
+                margin: 20px;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -662,7 +690,7 @@
             <div class="link"><a href="#localisation">Localisation</a></div>
 
             <div class="bottom">
-                <p>2025 &copy; Tous droits réservés<br>
+                <p>2025 © Tous droits réservés<br>
                     <a href="#" class="link">Mentions légales</a>
                 </p>
             </div>
@@ -755,7 +783,7 @@
         <!-- Modal -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <span class="close-modal" onclick="closeModal()">×</span>
                 <h3 id="modal-title"></h3>
                 <div id="modal-body"></div>
             </div>
@@ -766,9 +794,11 @@
             <div class="contact-container">
                 <div class="contact-leftpart">
                     <h1 id="contact" class="contact-h1">Contactez-nous</h1>
-
                     <div class="contact-form">
-                        <form method="post" action="mailto:myriam-abdallaoui@hotmail.com">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2884.0710554859976!2d7.2619!3d43.7009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cddaa5f5a5a5a5%3A0x5a5a5a5a5a5a5a5a!2s11b%20Boulevard%20Dubouchage%2C%2006000%20Nice%2C%20France!5e0!3m2!1sfr!2sfr!4v1234567890"
+                            allowfullscreen="" loading="lazy"></iframe>
+                        <!-- <form method="post" action="mailto:myriam-abdallaoui@hotmail.com">
                             <label>E-mail</label>
                             <input class="contact-area" type="email" name="email" placeholder="Votre e-mail" required>
 
@@ -784,7 +814,7 @@
                                 required></textarea>
 
                             <input class="submit-button" type="submit" value="Envoyer">
-                        </form>
+                        </form> -->
                     </div>
                 </div>
                 <div class="contact-rightpart">
@@ -811,30 +841,10 @@
                 </div>
             </div>
         </section>
-
-        <!-- Localisation -->
-        <section class="location-section">
-            <h1 id="localisation" class="location-h1">Notre cabinet</h1>
-            <div class="location-part">
-                <div class="location-leftpart">
-                    <a class="contact-tel" href="tel:0604653913">Tel : 06.04.65.39.13</a>
-                    <a class="contact-fax" href="mailto:myriam-abdallaoui@hotmail.com">Email :
-                        myriam-abdallaoui@hotmail.com</a>
-                    <div class="location-aside"></div>
-                </div>
-                <div class="location-rightpart">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2884.0710554859976!2d7.2619!3d43.7009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cddaa5f5a5a5a5%3A0x5a5a5a5a5a5a5a5a!2s11b%20Boulevard%20Dubouchage%2C%2006000%20Nice%2C%20France!5e0!3m2!1sfr!2sfr!4v1234567890"
-                        allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Maître Myriam ABDALLAOUI - Tous droits réservés</p>
-        <!--         <p>Site web : <a href="https://abdallaoui-avocat.fr">abdallaoui-avocat.fr</a></p>
-        <p><a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p> -->
+        <p>© 2025 Maître Myriam ABDALLAOUI - Tous droits réservés</p>
     </footer>
 
     <script>
@@ -874,7 +884,7 @@
             },
             sejour: {
                 title: "Titres de séjour",
-                content: "Obtenir un titre de séjour peut s'avérer complexe, tant les démarches administratives sont exigeantes et parfois sources de retards. Que vous soyez étudiant, salarié, demandeur d'asile, conjoint de Français ou parent d'enfant français, chaque situation exige une analyse rigoureuse et un dossier complet, conforme aux exigences de la Préfecture. Maître Myriam ABDALLAOUI vous accompagne à chaque étape de votre demande de titre de séjour.<br><br>En cas de refus ou de rejet de votre demande, Maître Myriam ABDALLAOUI vous assiste également dans le cadre d'un recours contentieux devant le Tribunal administratif."
+                content: "Obtenir un titre de séjour peut s'avérer complexe, tant les démarches administratives sont exigeantes et parfois sources de retards. Que vous soyez étudiant, salarié, demandeur d'asile, conjoint de Français ou parent d'enfant français, chaque situation exige une analyse rigoureuse et un dossier complet, conforme aux exigences de la Préfecture. Maître Myriam ABDALLAOUI vous accompagne à chaque étape de votre demande de titre de séjour.<br><br>En cas de refus ou de rejet de votre demande, Maître Myriam ABDALLAOUI vous assiste également dans the cadre d'un recours contentieux devant le Tribunal administratif."
             },
             nationalite: {
                 title: "Nationalité française",
