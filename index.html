@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +12,7 @@
     <meta property="og:description" content="Cabinet d'avocat à Nice - Droit civil, famille, étrangers">
     <meta property="og:url" content="https://abdallaoui-avocat.fr">
     <meta property="og:type" content="website">
-
     <title>Maître Myriam ABDALLAOUI - Avocate au Barreau de Nice</title>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Playfair+Display:wght@400;700&display=swap');
 
@@ -278,7 +275,7 @@
         .article-marteau {
             width: 100%;
             height: 500px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%232c3e50" d="M480 160H352l-48-48H208l-48 48H32c-17.67 0-32 14.33-32 32v288c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32V192c0-17.67-14.33-32-32-32zm-16 288H48c-8.84 0-16-7.16-16-16V208c0-8.84 7.16-16 16-16h112l48-48h96l48 48h112c8.84 0 16 7.16 16 16v224c0 8.84-7.16 16-16 16zm-64-352h-96V32h-64v64H112L56 40.96V96H16c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-40V40.96L400 96zM256 384c-70.69 0-128-57.31-128-128s57.31-128 128-128 128 57.31 128 128-57.31 128-128 128zm0-224c-52.94 0-96 43.06-96 96s43.06 96 96 96 96-43.06 96-96-43.06-96-96-96z"/></svg>') center no-repeat;
+            background: url('justice.svg') center no-repeat;
             background-size: contain;
             opacity: 0.1;
         }
@@ -355,14 +352,15 @@
 
         .modal-content {
             background: var(--white);
-            margin: 0;
-            padding: 20px;
-            border-radius: 0;
+            margin: 2% auto;
+            padding: 30px;
+            border-radius: 8px;
             position: relative;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             animation: modalFadeIn 0.3s ease;
             border-left: 4px solid var(--accent-color);
-            max-height: 100vh;
+            max-width: 800px; /* Increased for larger screens */
+            max-height: 90vh; /* Slightly more room to avoid scrolling */
             overflow-y: auto;
         }
 
@@ -371,7 +369,6 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -521,7 +518,7 @@
             border-radius: 5px;
             font-size: 16px;
             font-weight: 500;
-            text-transform: uppercase;
+            text-transform:24px;
             letter-spacing: 1px;
             cursor: pointer;
             transition: var(--transition);
@@ -627,7 +624,7 @@
             }
 
             .modal-content {
-                width: 100%;
+                width: 100බ;
                 height: 100%;
                 margin: 0;
                 padding: 20px;
@@ -692,7 +689,6 @@
         }
     </style>
 </head>
-
 <body>
     <input id="menuToggle" type="checkbox" />
     <div class="page-wrapper">
@@ -707,7 +703,6 @@
             <div class="link"><a href="#presentation">Présentation</a></div>
             <div class="link"><a href="#domainesexpertise">Domaines d'expertise</a></div>
             <div class="link"><a href="#contact">Contact</a></div>
-
             <div class="bottom">
                 <p>2025 © Tous droits réservés<br>
                     <a href="#" class="link">Mentions légales</a>
@@ -991,5 +986,4 @@
         document.head.appendChild(script);
     </script>
 </body>
-
 </html>
