@@ -362,9 +362,7 @@
             animation: modalFadeIn 0.3s ease;
             border-left: 4px solid var(--accent-color);
             max-width: 800px;
-            /* Increased for larger screens */
             max-height: 90vh;
-            /* Slightly more room to avoid scrolling */
             overflow-y: auto;
         }
 
@@ -454,6 +452,87 @@
             cursor: grab;
         }
 
+        /* Admin Section */
+        .admin-section {
+            display: none;
+            padding: 100px 20px;
+            background: var(--light-gray);
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .admin-h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .admin-form {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-form input[type="password"],
+        .admin-form input[type="text"],
+        .admin-form input[type="file"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 5px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .admin-form input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .admin-form button {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .admin-form button:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+        .admin-message.error {
+            color: var(--accent-color);
+        }
+
         /* Contact */
         .contact-part {
             padding: 100px 0;
@@ -523,7 +602,7 @@
             border-radius: 5px;
             font-size: 16px;
             font-weight: 500;
-            text-transform: 24px;
+            text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             transition: var(--transition);
@@ -629,7 +708,7 @@
             }
 
             .modal-content {
-                width: 100බ;
+                width: 100%;
                 height: 100%;
                 margin: 0;
                 padding: 20px;
@@ -709,9 +788,9 @@
             <div class="link"><a href="#presentation">Présentation</a></div>
             <div class="link"><a href="#domainesexpertise">Domaines d'expertise</a></div>
             <div class="link"><a href="#contact">Contact</a></div>
+            <div class="link"><a href="#admin" onclick="showAdminLogin()">Administration</a></div>
             <div class="bottom">
-                <p>2025 © Tous droits réservés<br>
-                    <a href="#" class="link">Mentions légales</a>
+                <p>2025 © Tous droits réservés
                 </p>
             </div>
         </div>
@@ -812,6 +891,27 @@
             </div>
         </div>
 
+        <!-- Modal pour l'administration -->
+        <div id="admin-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Administration</h3>
+                    <span class="close-modal" onclick="closeAdminModal()">×</span>
+                </div>
+                <div class="swipe-indicator"></div>
+                <div class="admin-form">
+                    <input type="password" id="admin-password" placeholder="Mot de passe" required>
+                    <input type="text" id="github-token" placeholder="GitHub Personal Access Token"
+                        style="display: none;">
+                    <input type="file" id="svg-file" accept=".svg" style="display: none;">
+                    <button id="admin-submit" onclick="uploadSVG()" style="display: none;">Mettre à jour
+                        justice.svg</button>
+                    <div id="admin-message" class="admin-message"></div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Contact -->
         <section class="contact-part">
             <div class="contact-container">
@@ -850,7 +950,8 @@
     </main>
 
     <footer>
-        <p>© 2025 Maître Myriam ABDALLAOUI - Tous droits réservés</p>
+        <p>© 2025 Maître Myriam ABDALLAOUI - Tous droits réservés | <a href="#"
+                onclick="showAdminLogin(); return false;">Administration</a></p>
     </footer>
 
     <script>
@@ -963,6 +1064,139 @@
             const modal = document.getElementById('modal');
             if (event.target === modal) {
                 closeModal();
+            }
+        }
+
+        function showAdminLogin() {
+            const adminModal = document.getElementById('admin-modal');
+            const passwordInput = document.getElementById('admin-password');
+            adminModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            passwordInput.focus();
+
+            // Initialize swipe to close
+            initSwipeToClose();
+        }
+
+        function closeAdminModal() {
+            const adminModal = document.getElementById('admin-modal');
+            adminModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            // Reset form
+            document.getElementById('admin-password').value = '';
+            document.getElementById('github-token').value = '';
+            document.getElementById('svg-file').value = '';
+            document.getElementById('admin-message').textContent = '';
+            document.getElementById('admin-message').classList.remove('error');
+            document.getElementById('github-token').style.display = 'none';
+            document.getElementById('svg-file').style.display = 'none';
+            document.getElementById('admin-submit').style.display = 'none';
+            document.getElementById('admin-password').style.display = 'block';
+        }
+
+        // Admin Section Logic
+        // Admin Section Logic
+        const ADMIN_PASSWORD = "FrançoisLeChienDu06"; // Strong password
+        document.getElementById('admin-password').addEventListener('input', () => {
+            const passwordInput = document.getElementById('admin-password');
+            const adminForm = document.querySelector('#admin-modal .admin-form');
+            const messageDiv = document.getElementById('admin-message');
+
+            if (passwordInput.value === ADMIN_PASSWORD) {
+                adminForm.querySelectorAll('input:not([type="password"]), button').forEach(el => {
+                    el.style.display = 'block';
+                });
+                passwordInput.style.display = 'none';
+                messageDiv.textContent = '';
+                messageDiv.classList.remove('error');
+            } else {
+                adminForm.querySelectorAll('input:not([type="password"]), button').forEach(el => {
+                    el.style.display = 'none';
+                });
+                passwordInput.style.display = 'block';
+                messageDiv.textContent = 'Veuillez entrer le mot de passe correct.';
+                messageDiv.classList.add('error');
+            }
+        });
+
+
+        async function uploadSVG() {
+            const token = document.getElementById('github-token').value;
+            const fileInput = document.getElementById('svg-file');
+            const messageDiv = document.getElementById('admin-message');
+            const file = fileInput.files[0];
+
+            if (!token || !file) {
+                messageDiv.textContent = 'Veuillez fournir un token GitHub et un fichier SVG.';
+                messageDiv.classList.add('error');
+                return;
+            }
+
+            if (!file.name.endsWith('.svg')) {
+                messageDiv.textContent = 'Veuillez sélectionner un fichier SVG.';
+                messageDiv.classList.add('error');
+                return;
+            }
+
+            messageDiv.textContent = 'Téléchargement en cours...';
+            messageDiv.classList.remove('error');
+
+            try {
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = async () => {
+                    const content = reader.result;
+                    const base64Content = btoa(content); // Encode file content to base64
+
+                    // Get the current file's SHA (required for updating)
+                    const repoOwner = 'YannickCardini'; // Replace with your GitHub username
+                    const repoName = 'abdallaoui-avocat'; // Replace with your repository name
+                    const filePath = 'justice.svg';
+
+                    const getFileResponse = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    let sha = '';
+                    if (getFileResponse.ok) {
+                        const fileData = await getFileResponse.json();
+                        sha = fileData.sha;
+                    }
+
+                    // Update the file
+                    const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: 'Update justice.svg via admin interface',
+                            content: base64Content,
+                            sha: sha,
+                            branch: 'main' // Adjust if your default branch is different (e.g., 'gh-pages')
+                        })
+                    });
+
+                    if (response.ok) {
+                        messageDiv.textContent = 'Fichier justice.svg mis à jour avec succès ! Les changements seront visibles sous peu.';
+                        messageDiv.classList.remove('error');
+                        // Clear inputs
+                        document.getElementById('github-token').value = '';
+                        fileInput.value = '';
+                    } else {
+                        const errorData = await response.json();
+                        messageDiv.textContent = `Erreur : ${errorData.message}`;
+                        messageDiv.classList.add('error');
+                    }
+                };
+            } catch (error) {
+                messageDiv.textContent = `Erreur : ${error.message}`;
+                messageDiv.classList.add('error');
             }
         }
 
